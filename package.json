@@ -1,0 +1,19 @@
+{
+  "name": "dominos-game",
+  "version": "0.1.0",
+  "description": "Classic double-six dominoes — web-hosted, no build step required",
+  "homepage": "https://ismaelcaraballo-afk.github.io/dominos-game/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ismaelcaraballo-afk/dominos-game.git"
+  },
+  "scripts": {
+    "start": "npx serve .",
+    "lint": "eslint js/"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "globals": "^15.0.0"
+  },
+  "license": "MIT"
+}
