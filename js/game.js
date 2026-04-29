@@ -63,6 +63,7 @@ const Game = (() => {
 
     player.removeTile(tile.id);
     Board.place(tile, end);
+    if (window.GameAudio) GameAudio.onTilePlaced();
 
     UI.refreshHand(getCurrentPlayer());
     UI.updateScores(players);
@@ -195,8 +196,14 @@ const Game = (() => {
     const gameWinner = players.find(p => p.score >= config.pointsGoal);
     if (gameWinner) {
       state = 'GAME_OVER';
+      if (window.GameAudio) {
+        gameWinner.index === 0 ? GameAudio.onRoundWin() : GameAudio.onRoundLose();
+      }
       UI.showGameOver(gameWinner);
     } else {
+      if (window.GameAudio) {
+        players[winnerIdx].index === 0 ? GameAudio.onRoundWin() : GameAudio.onRoundLose();
+      }
       UI.showRoundEnd(players[winnerIdx], pointsScored, reason);
     }
   }

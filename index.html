@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dominos</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/theme-dark.css" />
+  <link rel="stylesheet" href="css/theme-wood.css" />
+  <link rel="stylesheet" href="css/theme-neon.css" />
 </head>
-<body>
+<body data-theme="felt">
 
   <!-- ===================== SCREENS ===================== -->
 
@@ -20,6 +23,16 @@
       <button id="btn-vs-cpu" class="btn btn-primary">Play vs CPU</button>
       <button id="btn-local-mp" class="btn btn-secondary">Local Multiplayer</button>
       <button id="btn-how-to-play" class="btn btn-ghost">How to Play</button>
+    </div>
+    <!-- Theme + audio toolbar -->
+    <div id="start-toolbar" style="display:flex;gap:.6rem;margin-top:.5rem;align-items:center;">
+      <select id="theme-picker" title="Choose theme" style="padding:.35rem .6rem;border-radius:6px;border:1px solid var(--text-muted);background:transparent;color:var(--text-muted);font-size:.8rem;cursor:pointer;">
+        <option value="felt">&#127349; Felt (default)</option>
+        <option value="dark">&#127769; Dark</option>
+        <option value="wood">&#129717; Wood</option>
+        <option value="neon">&#127981; Neon</option>
+      </select>
+      <button id="btn-mute" class="btn btn-ghost btn-sm" title="Toggle sound">&#128266; Sound</button>
     </div>
   </div>
 
@@ -47,7 +60,10 @@
     <!-- Score bar -->
     <header id="score-bar">
       <div id="scores-container"></div>
-      <button id="btn-menu" class="btn btn-ghost btn-sm">Menu</button>
+      <div style="display:flex;gap:.5rem;align-items:center;">
+        <button id="btn-mute-game" class="btn btn-ghost btn-sm" title="Toggle sound">&#128266;</button>
+        <button id="btn-menu" class="btn btn-ghost btn-sm">Menu</button>
+      </div>
     </header>
 
     <!-- Board -->
@@ -108,6 +124,7 @@
   </div>
 
   <!-- ===================== SCRIPTS ===================== -->
+  <script src="js/audio.js"></script>
   <script src="js/domino.js"></script>
   <script src="js/board.js"></script>
   <script src="js/player.js"></script>
