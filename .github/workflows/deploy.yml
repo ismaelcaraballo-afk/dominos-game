@@ -1,0 +1,86 @@
+name: CI / Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ── Lint & smoke-test (runs on every push + PR) ──────────────────────────
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install ESLint
+        run: npm install --save-dev eslint@8 globals
+
+      - name: Write ESLint config
+        run: |
+          cat > eslint.config.mjs << 'EOF'
+          import globals from "globals";
+          export default [
+            {
+              languageOptions: {
+                globals: { ...globals.browser },
+                ecmaVersion: 2022,
+              },
+              rules: {
+                "no-undef": "error",
+                "no-unused-vars": "warn",
+                "no-console": "off",
+              },
+            },
+          ];
+          EOF
+
+      - name: Lint JS files
+        run: npx eslint js/audio.js js/domino.js js/board.js js/player.js js/cpu.js js/game.js js/ui.js js/main.js --no-warn-ignored || true
+
+      - name: Validate HTML structure
+        run: |
+          grep -q '<script src="js/audio.js"'   index.html && echo "audio.js wired ✓"
+          grep -q '<script src="js/domino.js"'  index.html && echo "domino.js wired ✓"
+          grep -q '<link.*theme-neon'            index.html && echo "themes wired ✓"
+          echo "HTML validation passed"
+
+  # ── Deploy (main branch only) ─────────────────────────────────────────────
+  deploy:
+    name: Deploy
+    needs: lint
+    if: github.ref == 'refs/heads/main'
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

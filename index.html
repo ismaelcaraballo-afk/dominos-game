@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dominos</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== SCREENS ===================== -->
+
+  <!-- Start Screen -->
+  <div id="screen-start" class="screen active">
+    <div class="brand">
+      <h1 class="logo">&#9670; DOMINOS &#9670;</h1>
+      <p class="tagline">Classic block game — up to 4 players</p>
+    </div>
+    <div class="menu">
+      <button id="btn-vs-cpu" class="btn btn-primary">Play vs CPU</button>
+      <button id="btn-local-mp" class="btn btn-secondary">Local Multiplayer</button>
+      <button id="btn-how-to-play" class="btn btn-ghost">How to Play</button>
+    </div>
+  </div>
+
+  <!-- Setup Screen -->
+  <div id="screen-setup" class="screen">
+    <h2>Game Setup</h2>
+    <label for="player-count">Number of players</label>
+    <select id="player-count">
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <label for="points-goal">Points goal</label>
+    <select id="points-goal">
+      <option value="100">100</option>
+      <option value="150">150</option>
+      <option value="200">200</option>
+    </select>
+    <button id="btn-start-game" class="btn btn-primary">Start Game</button>
+    <button id="btn-back-setup" class="btn btn-ghost">Back</button>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="screen-game" class="screen">
+    <!-- Score bar -->
+    <header id="score-bar">
+      <div id="scores-container"></div>
+      <button id="btn-menu" class="btn btn-ghost btn-sm">Menu</button>
+    </header>
+
+    <!-- Board -->
+    <main id="board-wrapper">
+      <div id="board">
+        <!-- Domino tiles rendered here by board.js -->
+      </div>
+    </main>
+
+    <!-- Boneyard -->
+    <aside id="boneyard-area">
+      <div id="boneyard-pile" title="Draw from boneyard">
+        <span id="boneyard-count">0</span>
+      </div>
+    </aside>
+
+    <!-- Player hand -->
+    <footer id="hand-area">
+      <div id="player-hand">
+        <!-- Playable tiles rendered here by ui.js -->
+      </div>
+      <button id="btn-pass" class="btn btn-secondary btn-sm" disabled>Pass</button>
+    </footer>
+  </div>
+
+  <!-- How to Play Screen -->
+  <div id="screen-howto" class="screen">
+    <h2>How to Play</h2>
+    <ol>
+      <li>Each player draws 7 tiles from the shuffled set.</li>
+      <li>The player with the highest double starts; otherwise the highest tile leads.</li>
+      <li>On your turn, place a tile that matches an open end of the chain, or draw from the boneyard.</li>
+      <li>If no play is possible and the boneyard is empty, pass.</li>
+      <li>A round ends when a player plays all tiles, or when the game is blocked.</li>
+      <li>The round winner scores the total pip count of all opponents' remaining tiles.</li>
+      <li>First player to reach the points goal wins!</li>
+    </ol>
+    <button id="btn-back-howto" class="btn btn-ghost">Back</button>
+  </div>
+
+  <!-- Round-end overlay -->
+  <div id="overlay-round" class="overlay hidden">
+    <div class="overlay-card">
+      <h3 id="round-result-title">Round Over</h3>
+      <p id="round-result-body"></p>
+      <button id="btn-next-round" class="btn btn-primary">Next Round</button>
+    </div>
+  </div>
+
+  <!-- Game-over overlay -->
+  <div id="overlay-gameover" class="overlay hidden">
+    <div class="overlay-card">
+      <h2 id="gameover-title">&#127942; Winner!</h2>
+      <p id="gameover-body"></p>
+      <button id="btn-play-again" class="btn btn-primary">Play Again</button>
+      <button id="btn-main-menu" class="btn btn-ghost">Main Menu</button>
+    </div>
+  </div>
+
+  <!-- ===================== SCRIPTS ===================== -->
+  <script src="js/domino.js"></script>
+  <script src="js/board.js"></script>
+  <script src="js/player.js"></script>
+  <script src="js/cpu.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+/* ============================================================
+   THEME: Neon
+   Cyberpunk arcade — glowing tiles, synthwave palette
+   ============================================================ */
+
+[data-theme="neon"] {
+  --felt:        #0d001a;
+  --felt-dark:   #06000e;
+  --felt-light:  #1a0033;
+  --tile-bg:     #120020;
+  --tile-border: #cc00ff;
+  --tile-pip:    #00ffcc;
+  --tile-divider:#ff00aa;
+  --accent:      #ff00cc;
+  --accent-dark: #cc0099;
+  --text-light:  #f0e0ff;
+  --text-muted:  #996699;
+  --overlay-bg:  rgba(0, 0, 16, .82);
+  --shadow:      0 0 20px rgba(204, 0, 255, .5);
+}
+
+[data-theme="neon"] body {
+  background: var(--felt-dark);
+}
+
+[data-theme="neon"] #board-wrapper {
+  background-color: var(--felt-dark);
+  background-image:
+    linear-gradient(rgba(204,0,255,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(204,0,255,.04) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+[data-theme="neon"] .logo {
+  color: var(--accent);
+  text-shadow:
+    0 0 8px var(--accent),
+    0 0 20px var(--accent),
+    0 0 40px rgba(255,0,204,.6);
+}
+
+/* Glowing tiles */
+[data-theme="neon"] .tile {
+  background: var(--tile-bg);
+  border-color: var(--tile-border);
+  box-shadow:
+    0 0 6px rgba(204,0,255,.6),
+    0 2px 8px rgba(0,0,0,.6);
+}
+
+[data-theme="neon"] .tile:hover,
+[data-theme="neon"] .tile.selected {
+  box-shadow:
+    0 0 14px rgba(204,0,255,.9),
+    0 0 30px rgba(204,0,255,.4),
+    0 4px 16px rgba(0,0,0,.7);
+}
+
+[data-theme="neon"] .pip {
+  background: var(--tile-pip);
+  box-shadow: 0 0 5px var(--tile-pip);
+}
+
+[data-theme="neon"] .tile-divider {
+  background: var(--tile-divider);
+  box-shadow: 0 0 4px var(--tile-divider);
+}
+
+/* Glowing buttons */
+[data-theme="neon"] .btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 0 14px rgba(255,0,204,.6);
+}
+[data-theme="neon"] .btn-primary:hover {
+  box-shadow: 0 0 24px rgba(255,0,204,.9);
+}
+
+[data-theme="neon"] .btn-secondary {
+  background: transparent;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  box-shadow: 0 0 8px rgba(0,255,204,.3);
+}
+
+/* Score bar / hand area */
+[data-theme="neon"] #score-bar,
+[data-theme="neon"] #hand-area {
+  background: var(--felt-dark);
+  border-color: rgba(204,0,255,.35);
+}
+
+[data-theme="neon"] .player-score {
+  color: #00ffcc;
+  text-shadow: 0 0 8px #00ffcc;
+}
+
+/* Overlays */
+[data-theme="neon"] .overlay-card {
+  background: #06000e;
+  border-color: var(--accent);
+  box-shadow: 0 0 30px rgba(255,0,204,.4);
+}
+[data-theme="neon"] .overlay-card h2,
+[data-theme="neon"] .overlay-card h3 {
+  text-shadow: 0 0 12px var(--accent);
+}
+
+/* Boneyard */
+[data-theme="neon"] #boneyard-pile {
+  border-color: rgba(204,0,255,.5);
+  color: rgba(204,0,255,.7);
+}
+[data-theme="neon"] #boneyard-pile:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(255,0,204,.5);
+}

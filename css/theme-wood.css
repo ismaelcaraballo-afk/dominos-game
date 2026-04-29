@@ -1,0 +1,63 @@
+/* ============================================================
+   THEME: Wood
+   Warm oak table — natural textures, warm tones
+   ============================================================ */
+
+[data-theme="wood"] {
+  --felt:        #5c3d1e;
+  --felt-dark:   #3e2610;
+  --felt-light:  #7a5230;
+  --tile-bg:     #fdf6e3;
+  --tile-border: #c4a265;
+  --tile-pip:    #1a0a00;
+  --tile-divider:#8a6535;
+  --accent:      #e8943a;
+  --accent-dark: #c47520;
+  --text-light:  #f5e8d0;
+  --text-muted:  #c4a07a;
+  --overlay-bg:  rgba(20, 8, 0, .72);
+  --shadow:      0 4px 18px rgba(0, 0, 0, .5);
+}
+
+[data-theme="wood"] body {
+  background: var(--felt-dark);
+}
+
+[data-theme="wood"] #board-wrapper {
+  background-color: var(--felt);
+  background-image:
+    repeating-linear-gradient(
+      92deg,
+      transparent 0px,
+      transparent 28px,
+      rgba(0,0,0,.04) 28px,
+      rgba(0,0,0,.04) 30px
+    ),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 60px,
+      rgba(255,255,255,.025) 60px,
+      rgba(255,255,255,.025) 62px
+    );
+}
+
+[data-theme="wood"] .logo {
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(232, 148, 58, .4);
+}
+
+[data-theme="wood"] .tile {
+  box-shadow: 2px 3px 10px rgba(0,0,0,.4), inset 0 1px 0 rgba(255,255,255,.6);
+}
+
+[data-theme="wood"] #score-bar,
+[data-theme="wood"] #hand-area {
+  background: var(--felt-dark);
+  border-color: var(--felt-light);
+}
+
+[data-theme="wood"] .overlay-card {
+  background: #2a1400;
+  border-color: var(--felt-light);
+}

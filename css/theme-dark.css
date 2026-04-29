@@ -1,0 +1,33 @@
+/* ============================================================
+   THEME: Dark (default)
+   Deep space / midnight felt — high-contrast, easy on eyes
+   ============================================================ */
+
+[data-theme="dark"] {
+  --felt:        #1a2332;
+  --felt-dark:   #111820;
+  --felt-light:  #1f2e42;
+  --tile-bg:     #e8e4dc;
+  --tile-border: #b8a88a;
+  --tile-pip:    #111111;
+  --tile-divider:#7a6a55;
+  --accent:      #4fa3e8;
+  --accent-dark: #2e7fc4;
+  --text-light:  #e8eef5;
+  --text-muted:  #7a9ab5;
+  --overlay-bg:  rgba(0, 8, 20, .75);
+  --shadow:      0 4px 22px rgba(0, 0, 0, .6);
+}
+
+[data-theme="dark"] body {
+  background: var(--felt-dark);
+}
+
+[data-theme="dark"] #board-wrapper {
+  background-image: radial-gradient(ellipse at 50% 50%, #1f2e42 0%, #111820 80%);
+}
+
+[data-theme="dark"] .logo {
+  color: var(--accent);
+  text-shadow: 0 0 18px rgba(79, 163, 232, .45);
+}
