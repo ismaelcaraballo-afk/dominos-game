@@ -100,10 +100,16 @@ document.addEventListener('DOMContentLoaded', () => {
   // GAME SCREEN
   // ================================================================
   document.getElementById('btn-menu').addEventListener('click', () => {
-    if (confirm('Return to main menu? Current game will be lost.')) {
-      UI.hideOverlays();
-      UI.showScreen('start');
-    }
+    UI.showPauseMenu();
+  });
+
+  document.getElementById('btn-resume').addEventListener('click', () => {
+    UI.hidePauseMenu();
+  });
+
+  document.getElementById('btn-pause-main-menu').addEventListener('click', () => {
+    UI.hideOverlays();
+    UI.showScreen('start');
   });
 
   document.getElementById('btn-pass').addEventListener('click', () => {

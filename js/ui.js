@@ -21,6 +21,7 @@ const UI = (() => {
 
   const overlayRound    = document.getElementById('overlay-round');
   const overlayGameover = document.getElementById('overlay-gameover');
+  const overlayPause    = document.getElementById('overlay-pause');
 
   // ------------------------------------------------------------------
   // Screen navigation
@@ -230,6 +231,59 @@ const UI = (() => {
   function hideOverlays() {
     overlayRound.classList.add('hidden');
     overlayGameover.classList.add('hidden');
+    overlayPause.classList.add('hidden');
+  }
+
+  function showPauseMenu() {
+    overlayPause.classList.remove('hidden');
+  }
+
+  function hidePauseMenu() {
+    overlayPause.classList.add('hidden');
+  }
+
+  // ------------------------------------------------------------------
+  // Toast notifications
+
+  let _toastTimer = null;
+
+  function showToast(message, duration = 2500) {
+    let toast = document.getElementById('ui-toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'ui-toast';
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 140px;
+        left: 50%;
+        transform: translateX(-50%) translateY(10px);
+        background: var(--felt-dark, #1a3a2a);
+        color: var(--text-main, #f5f0e8);
+        border: 1px solid var(--felt-light, #2d5a3d);
+        border-radius: 8px;
+        padding: .55rem 1.1rem;
+        font-size: .85rem;
+        letter-spacing: .02em;
+        box-shadow: 0 4px 16px rgba(0,0,0,.4);
+        z-index: 100;
+        opacity: 0;
+        transition: opacity .2s ease, transform .2s ease;
+        pointer-events: none;
+        white-space: nowrap;
+      `;
+      document.body.appendChild(toast);
+    }
+
+    if (_toastTimer) clearTimeout(_toastTimer);
+
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+
+    _toastTimer = setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(-50%) translateY(10px)';
+    }, duration);
   }
 
   // ------------------------------------------------------------------
@@ -245,5 +299,8 @@ const UI = (() => {
     showRoundEnd,
     showGameOver,
     hideOverlays,
+    showPauseMenu,
+    hidePauseMenu,
+    showToast,
   };
 })();
