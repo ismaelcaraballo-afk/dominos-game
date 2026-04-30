@@ -93,16 +93,21 @@ const Board = (() => {
   // ---------- Internal rendering ----------
 
   function _render() {
-    const boardEl = document.getElementById('board');
-    if (!boardEl) return;
-    boardEl.innerHTML = '';
-    chain.forEach(entry => {
-      const el = UI.createTileElement(entry.tile, {
-        placed: true,
-        horizontal: entry.orientation === 'horizontal',
+    if (window.BoardRenderer) {
+      BoardRenderer.render([...chain]);
+    } else {
+      // DOM fallback when PixiJS renderer is not loaded
+      const boardEl = document.getElementById('board');
+      if (!boardEl) return;
+      boardEl.innerHTML = '';
+      chain.forEach(entry => {
+        const el = UI.createTileElement(entry.tile, {
+          placed: true,
+          horizontal: entry.orientation === 'horizontal',
+        });
+        boardEl.appendChild(el);
       });
-      boardEl.appendChild(el);
-    });
+    }
   }
 
   return { reset, isEmpty, placeFirst, place, validEnds, canPlay,
