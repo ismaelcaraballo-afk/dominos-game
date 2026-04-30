@@ -31,7 +31,7 @@ const PixiRenderer = (() => {
     const wrapper = document.getElementById('board-wrapper');
     if (!_app || !wrapper) return;
     _app.renderer.resize(wrapper.clientWidth, wrapper.clientHeight);
-    if (window.BoardRenderer) BoardRenderer.render();
+    if (window.BoardRenderer) BoardRenderer.render(Board.getChain());
   }
 
   function getApp()   { return _app; }
