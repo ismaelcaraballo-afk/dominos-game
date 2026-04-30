@@ -7,6 +7,9 @@
 'use strict';
 
 document.addEventListener('DOMContentLoaded', () => {
+  PixiRenderer.init().then(() => {
+    BoardRenderer.init();
+  });
 
   // ================================================================
   // AUDIO — init on first user interaction to satisfy browser policy
@@ -161,7 +164,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // ================================================================
   window.GameAudio = {
     onTilePlaced()  { Audio.play('place'); },
-    onRoundWin()    { Audio.play('win');   },
+    onRoundWin()    {
+      Audio.play('win');
+      const app = PixiRenderer.getApp();
+      if (app) ParticleManager.burst(app.screen.width / 2, app.screen.height / 2);
+    },
     onRoundLose()   { Audio.play('lose');  },
   };
 

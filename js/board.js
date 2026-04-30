@@ -93,13 +93,9 @@ const Board = (() => {
   // ---------- Internal rendering ----------
 
   function _render() {
-    const boardEl = document.getElementById('board');
-    if (!boardEl) return;
-    boardEl.innerHTML = '';
-    chain.forEach(entry => {
-      const el = UI.createTileElement(entry.tile, { placed: true });
-      boardEl.appendChild(el);
-    });
+    if (window.BoardRenderer) {
+      BoardRenderer.render([...chain]);
+    }
   }
 
   return { reset, isEmpty, placeFirst, place, validEnds, canPlay,
