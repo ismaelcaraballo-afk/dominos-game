@@ -36,7 +36,7 @@ const Board = (() => {
    */
   function placeFirst(tile) {
     if (!isEmpty()) throw new Error('Board already has tiles.');
-    chain.push({ tile, side: 'center' });
+    chain.push({ tile, side: 'center', orientation: isDouble(tile) ? 'vertical' : 'horizontal' });
     leftEnd  = tile.high;
     rightEnd = tile.low;
     if (isDouble(tile)) spinner = tile;
@@ -55,12 +55,12 @@ const Board = (() => {
     if (end === 'left') {
       matchValue  = leftEnd;
       newExposed  = (tile.high === leftEnd) ? tile.low : tile.high;
-      chain.unshift({ tile, side: 'left', exposed: newExposed });
+      chain.unshift({ tile, side: 'left', exposed: newExposed, orientation: isDouble(tile) ? 'vertical' : 'horizontal' });
       leftEnd = newExposed;
     } else {
       matchValue  = rightEnd;
       newExposed  = (tile.high === rightEnd) ? tile.low : tile.high;
-      chain.push({ tile, side: 'right', exposed: newExposed });
+      chain.push({ tile, side: 'right', exposed: newExposed, orientation: isDouble(tile) ? 'vertical' : 'horizontal' });
       rightEnd = newExposed;
     }
 
@@ -97,7 +97,10 @@ const Board = (() => {
     if (!boardEl) return;
     boardEl.innerHTML = '';
     chain.forEach(entry => {
-      const el = UI.createTileElement(entry.tile, { placed: true });
+      const el = UI.createTileElement(entry.tile, {
+        placed: true,
+        horizontal: entry.orientation === 'horizontal',
+      });
       boardEl.appendChild(el);
     });
   }
